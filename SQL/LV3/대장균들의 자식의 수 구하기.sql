@@ -1,0 +1,8 @@
+# COUNT(*)를 사용하면 자식이 없는 row도 CHILD_COUNT의 값이 1로 나타남
+# 따라서 COUNT(TED.ID)로 명확하게 개수를 셀 column을 지정해주면 TED.ID의 값이 NULL이 아닌 row의 수만 세게 되어 원하는 답이 됨
+
+SELECT ED.ID, COUNT(TED.ID) AS CHILD_COUNT
+FROM ECOLI_DATA ED
+LEFT JOIN ECOLI_DATA TED ON ED.ID=TED.PARENT_ID
+GROUP BY ED.ID
+ORDER BY ED.ID ASC

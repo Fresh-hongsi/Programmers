@@ -33,3 +33,41 @@ int solution(vector<int> elements) {
     
     return s.size(); // 정답 반환
 }
+
+// #include <string>
+// #include <vector>
+// #include <algorithm>
+// #include <functional>
+// #include <iostream>
+// using namespace std;
+
+// int solution(vector<int> elements) {
+//     int answer = 0;
+//     vector<int> ans;
+//     vector<int> temp;
+//     for(int i=0;i<elements.size();i++){
+//         int t = elements[i];
+//         temp.push_back(t);
+//     }
+//     for(int i=0;i<elements.size();i++){
+//         int t = elements[i];
+//         temp.push_back(t);
+//     }
+    
+//     for(int i=1;i<=elements.size();i++){ // 1개부터 n개까지
+//         for(int j=0;j<elements.size();j++){ // 시작점
+//             int t = 0;
+//             for(int k=j;k<i+j;k++){
+//                 t+=temp[k];
+//             }
+//             ans.push_back(t);
+//         }
+//     }
+    
+//     sort(ans.begin(),ans.end());
+//     ans.erase(unique(ans.begin(),ans.end()),ans.end());
+    
+//     answer = ans.size();
+//     return answer;
+// }
+

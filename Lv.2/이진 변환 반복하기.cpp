@@ -55,3 +55,56 @@ vector<int> solution(string s) {
     return answer;
 }
 
+
+
+// #include <string>
+// #include <vector>
+// #include <algorithm>
+// #include <functional>
+// #include <map>
+// #include <iostream>
+// using namespace std;
+
+// int a = 0;
+// int b = 0;
+// string conversion(string s){
+    
+//     string temp = "";
+//     for(int i=0;i<s.length();i++){
+//         if(s[i]=='1'){
+//             temp+="1";
+//         }
+//         else{
+//             b++;
+//         }
+//     }
+    
+//     int k = temp.length();
+//     string result = "";
+//     while(k!=0){
+//         result+=to_string(k%2);
+//         k/=2;
+//     }
+    
+//     reverse(result.begin(),result.end());
+//     return result;
+// }
+
+// vector<int> solution(string s) {
+//     vector<int> answer;
+    
+
+
+//     while(1){
+//          s = conversion(s);
+//          a++;
+//          if(s=="1"){
+//              answer.push_back(a);
+//              answer.push_back(b);
+//              break;
+//          }
+//     }
+    
+//     return answer;
+// }
+

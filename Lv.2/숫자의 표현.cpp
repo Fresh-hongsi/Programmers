@@ -37,6 +37,46 @@
 //     return answer;
 // }
 
+// #include <string>
+// #include <vector>
+// #include <algorithm>
+// #include <iostream>
+// #include <functional>
+// using namespace std;
+
+// // 투포인터 사용해보기
+// int solution(int n) {
+//     int answer = 1; // start가 n일 때의 경우 1개 값을 미리 카운트
+//     int start = 1; // 시작 포인터
+//     int end = 1; // 끝 포인터
+//     int sum = 1; // 현재 sum값
+//     while(start!=n){ // 시작 포인터가 n에 도달하기 전까지 반복
+        
+//         if(sum==n){ // 만약 sum이 n이라면, 시작 포인터를 1증가시키고, sum값 업데이트
+//             sum-=start;
+//             start++;
+//             answer++;           
+//         }
+        
+//         else if(sum<n){ // 만약 sum이 n보다 작다면, 끝 포인터를 1 증가시키고, sum값 업데이트
+//             end++;
+//             sum+=end;            
+//         }
+        
+//         else{ // 만약 sum이 n보다 크다면, 시작 포인터를 1 증가시키고, sum값 업데이트 
+//             sum-=start;
+//             start++; 
+            
+//         }
+        
+//     }
+    
+//     return answer;
+    
+    
+// }
+
+
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -44,34 +84,27 @@
 #include <functional>
 using namespace std;
 
-// 투포인터 사용해보기
 int solution(int n) {
-    int answer = 1; // start가 n일 때의 경우 1개 값을 미리 카운트
-    int start = 1; // 시작 포인터
-    int end = 1; // 끝 포인터
-    int sum = 1; // 현재 sum값
-    while(start!=n){ // 시작 포인터가 n에 도달하기 전까지 반복
-        
-        if(sum==n){ // 만약 sum이 n이라면, 시작 포인터를 1증가시키고, sum값 업데이트
+    int answer = 1;
+    
+    int sum = 1;
+    int start = 1;
+    int end = 1;
+    
+    while(end<n){
+        if(sum<n){
+            end++;
+            sum+=end;
+        }
+        else if(sum>n){
             sum-=start;
             start++;
-            answer++;           
         }
-        
-        else if(sum<n){ // 만약 sum이 n보다 작다면, 끝 포인터를 1 증가시키고, sum값 업데이트
+        else{
+            answer++;
             end++;
-            sum+=end;            
+            sum+=end;
         }
-        
-        else{ // 만약 sum이 n보다 크다면, 시작 포인터를 1 증가시키고, sum값 업데이트 
-            sum-=start;
-            start++; 
-            
-        }
-        
     }
-    
     return answer;
-    
-    
 }

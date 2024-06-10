@@ -62,6 +62,47 @@
 //     return answer;
 // }
 
+// #include <string>
+// #include <vector>
+// #include <algorithm>
+// #include <iostream>
+// #include <functional>
+// using namespace std;
+
+// int func(int n){
+    
+//     int count = 0;
+//     while(n>0){
+//         if(n%2==1){   
+//             count++;
+//         }
+//         n/=2;        
+//     }
+    
+//     return count;
+// }
+
+// int solution(int n) {
+//     int answer = 0;
+    
+//     bool flag = false;
+    
+//     int nCount = 0;
+//     int mCount = 0;
+    
+//     nCount = func(n);
+//     while(1){
+//         n++;
+//         mCount = func(n);
+//         if(nCount==mCount){
+//             flag = true;
+//             break;
+//         }
+//     }
+//     answer = n;
+//     return answer;
+// }
+
 #include <string>
 #include <vector>
 #include <algorithm>

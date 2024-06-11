@@ -43,9 +43,50 @@
 //     return answer;
 // }
 
+// #include <iostream>
+// #include <string>
+// #include <algorithm>
+// #include <functional>
+// #include <stack>
+// using namespace std;
+
+// int solution(string s)
+// {
+//     int answer = -1;
+
+//     stack<char> st;
+//     st.push(s[0]);
+    
+//     for(int i=1;i<s.length();i++){
+//         if(st.empty()){
+//             st.push(s[i]);
+//         }
+        
+//         else{
+//             char t = st.top();
+//             if(t==s[i]){
+//                 st.pop();
+//             }
+//             else{
+//                 st.push(s[i]);
+//             }
+//         }
+//     }
+    
+//     if(!st.empty()){
+//         answer=0;
+//     }else{
+//         answer=1;
+//     }
+
+//     return answer;
+// }
+
+
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <vector>
 #include <functional>
 #include <stack>
 using namespace std;
@@ -55,29 +96,30 @@ int solution(string s)
     int answer = -1;
 
     stack<char> st;
-    st.push(s[0]);
     
-    for(int i=1;i<s.length();i++){
-        if(st.empty()){
-            st.push(s[i]);
-        }
+    for(int i=0;i<s.length();i++){
         
-        else{
-            char t = st.top();
-            if(t==s[i]){
+        if(!st.empty()){
+            char top = st.top();
+            if(top==s[i]){
                 st.pop();
             }
             else{
                 st.push(s[i]);
             }
         }
+        else{
+            st.push(s[i]);
+        }
+        
     }
     
     if(!st.empty()){
         answer=0;
-    }else{
+    }
+    else{
         answer=1;
     }
-
+    
     return answer;
 }

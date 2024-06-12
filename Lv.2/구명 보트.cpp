@@ -41,42 +41,79 @@
 //     return answer;
 
 
+// #include <string>
+// #include <vector>
+// #include <algorithm>
+// #include <iostream>
+// #include <functional>
+// using namespace std;
+
+// int solution(vector<int> people, int limit) {
+    
+//     int answer = 0;
+    
+//     // 그리디 - 가장 무거운 사람과 가장 가벼운 사람 같이 태우기 시도
+//     // 80 70 40 20 10 10 10
+    
+//     sort(people.begin(),people.end(),greater<int>()); // 내림차순 정렬
+   
+//     int i = 0; // 현재 시점 가장 무거운 사람
+//     int j = people.size()-1; // 현재 시점 가장 가벼운 사람
+    
+//     while(i<=j){
+        
+//         int sum = people[i]; // 일단 무거운 사람 태우기
+//         if(sum+people[j]<=limit){ // 만약 가벼운 사람도 태울 수 있으면
+//             answer++; // 보트 탑승
+//             i++; // 다음 무거운 사람 찾기
+//             j--; // 다음 가벼운 사람 찾기
+//         }
+//         else{ // 만약 가벼운 사람을 같이 태울 수 없으면
+//             answer++; // 무거운 사람만 보트 태우기
+//             i++; // 다음 무거운 사람 찾기
+//         }
+//     }
+    
+//     return answer;
+    
+    
+    
+// }
+// // }
+
+
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <iostream>
 #include <functional>
+#include <iostream>
+#include <deque>
 using namespace std;
 
 int solution(vector<int> people, int limit) {
     
+    // 가장 무거운 사람과 가장 가벼운 사람 같이 태우기 시도
+    // 투포인터 활용
     int answer = 0;
+    sort(people.begin(),people.end(),greater<int>()); 
     
-    // 그리디 - 가장 무거운 사람과 가장 가벼운 사람 같이 태우기 시도
-    // 80 70 40 20 10 10 10
+    int st = 0;
+    int end = people.size()-1;
     
-    sort(people.begin(),people.end(),greater<int>()); // 내림차순 정렬
-   
-    int i = 0; // 현재 시점 가장 무거운 사람
-    int j = people.size()-1; // 현재 시점 가장 가벼운 사람
-    
-    while(i<=j){
+    while(st<=end){
+        answer++; // 배 추가
         
-        int sum = people[i]; // 일단 무거운 사람 태우기
-        if(sum+people[j]<=limit){ // 만약 가벼운 사람도 태울 수 있으면
-            answer++; // 보트 탑승
-            i++; // 다음 무거운 사람 찾기
-            j--; // 다음 가벼운 사람 찾기
+        if((people[st]+people[end])<=limit){
+            st++;
+            end--;
         }
-        else{ // 만약 가벼운 사람을 같이 태울 수 없으면
-            answer++; // 무거운 사람만 보트 태우기
-            i++; // 다음 무거운 사람 찾기
+        else{
+            st++;
         }
     }
-    
+  
     return answer;
-    
-    
-    
 }
-// }
+
+
+      

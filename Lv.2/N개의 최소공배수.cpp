@@ -48,6 +48,41 @@
 //     return answer;
 // }
 
+// #include <string>
+// #include <vector>
+// #include <algorithm>
+// #include <functional>
+// #include <iostream>
+// using namespace std;
+
+// int gcd(int a, int b){
+//     if(b==0){
+//         return a;
+//     }
+    
+//     else{
+//         return gcd(b, a%b);
+//     }
+// }
+
+// int solution(vector<int> arr) {
+    
+    
+//     sort(arr.begin(),arr.end()); // 오름차순 정렬
+//     int curGcd = 0; // 최대 공약수
+//     int answer = arr[0]; // 현재까지의 최소공배수
+//     for(int i=1;i<arr.size();i++){
+//         int max1 = max(answer,arr[i]);
+//         int min1 = min(answer,arr[i]);
+//         curGcd = gcd(max1,min1); // 현재 비교 수 간의 최대 공약수
+//         answer = answer*arr[i]/curGcd; // 현재 수와 다음 수의 최소공배수 갱신
+//     }
+
+    
+    
+//     return answer;
+// }
+
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -55,30 +90,33 @@
 #include <iostream>
 using namespace std;
 
-int gcd(int a, int b){
+// 두 수의 최대공약수 구하기
+// a가 b보다 같거나 커야 정상적으로 동작
+int calculateGCD(int a, int b){
+    
     if(b==0){
         return a;
     }
     
     else{
-        return gcd(b, a%b);
+        return calculateGCD(b,a%b);
     }
 }
 
 int solution(vector<int> arr) {
     
-    
+    int answer = 0;
     sort(arr.begin(),arr.end()); // 오름차순 정렬
-    int curGcd = 0; // 최대 공약수
-    int answer = arr[0]; // 현재까지의 최소공배수
-    for(int i=1;i<arr.size();i++){
-        int max1 = max(answer,arr[i]);
-        int min1 = min(answer,arr[i]);
-        curGcd = gcd(max1,min1); // 현재 비교 수 간의 최대 공약수
-        answer = answer*arr[i]/curGcd; // 현재 수와 다음 수의 최소공배수 갱신
+    
+    int curLCM = arr[0]; // 최초 세팅(최초공배수)
+    
+    for(int i=1;i<arr.size();i++){ // 앞에서부터 순차적으로 두 수의 최소공배수를 구해나감
+        
+        int gcd = calculateGCD(curLCM,arr[i]); //  두 수의 최대공약수 구하기
+        int lcm = (curLCM*arr[i])/gcd; // 두 수의 최소공배수 구하기 
+        curLCM = lcm; // 다음 수와 비교 통한 lcm을 구하기 위해 curLCM 재세팅
     }
-
     
-    
+    answer = curLCM;
     return answer;
 }

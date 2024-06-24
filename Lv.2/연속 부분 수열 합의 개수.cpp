@@ -71,3 +71,46 @@ int solution(vector<int> elements) {
 //     return answer;
 // }
 
+
+// #include <string>
+// #include <vector>
+// #include <algorithm>
+// #include <iostream>
+// #include <functional>
+// #include <map>
+// using namespace std;
+
+// int solution(vector<int> elements) {
+//     int answer = 0;
+//     int size = elements.size(); // 최초 elements 벡터 길이
+    
+//     // 문제 풀이 효율성을 위해 기존 elements 벡터에다가 elements 벡터 요소를 이어붙여줌
+//     for(int i=0;i<size;i++){
+//         elements.push_back(elements[i]);
+//     }
+    
+//     // 부분 배열의 합을 저장할 map -> key:연속 부분 배열의 합, val: 해당 연속 부분 배열의 합의 개수 -> 0 또는 1만 가짐 
+//     map<int,int> m;
+    
+//     // 연속 부분 배열의 합을 구해보기
+//     for(int i=1;i<=size;i++){ //i: 현재 탐색할 부분 배열의 길이
+//         for(int j=0;j<size;j++){//j: 현재 탐색 중인 부분 배열의 첫번째 인덱스
+//             int sum = 0;
+//             for(int k=j;k<j+i;k++){//k: 현재 탐색 중인 부분 배열의 인덱스
+//                 sum+=elements[k];
+                
+//             }
+            
+//             if(m.find(sum)!=m.end()){ // 구한 연속 부분 배열의 합인 sum이 map에 이미 존재한다면
+//                 continue;
+//             }
+//             else{ // 존재 하지 않는 경우, map에 추가
+//                 m[sum]=1;
+//             }
+//         }
+//     }
+    
+//     // map의 크기가 곧 찾아낸 모든 부분 배열의 합의 개수
+//     answer=m.size();
+//     return answer;
+// }

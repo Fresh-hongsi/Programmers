@@ -90,3 +90,65 @@ int solution(int k, vector<int> tangerine) {
 // 3:2
 // 4:1
 // 5:2
+
+
+// #include <string>
+// #include <vector>
+// #include <map>
+// #include <algorithm>
+// #include <functional>
+// #include <iostream>
+// using namespace std;
+
+// bool comp(pair<int,int> a, pair<int,int> b){ // val이 큰 순으로 정렬
+    
+//     if(a.second!=b.second){
+//         return a.second>b.second;
+//     }
+//     else{
+//         return a.first<b.first;
+//     }
+// }
+
+// int solution(int k, vector<int> tangerine) {
+//     int answer = 1;
+    
+//     vector<pair<int,int>> v;
+//     map<int,int> m1;
+//     map<int,int> m2;
+//     for(int i=0;i<tangerine.size();i++){
+//         int temp = tangerine[i];
+//         m1[temp]++;
+//     }
+    
+//     // map을 vector로 옮기기(정렬 위해)
+//     for(auto k : m1){
+//         int key = k.first;
+//         int val = k.second;
+//         v.push_back(make_pair(key,val));
+//     }
+    
+    
+//     // val이 큰 순으로 정렬
+//     sort(v.begin(),v.end(),comp);
+
+//     for(auto p : v){
+        
+//         k-=p.second;
+        
+//         if(k<=0){
+//             break;
+//         }
+//         else{
+//             answer++;
+//         }
+//     }
+    
+// //     1:1
+// //     2:2
+// //     3:2
+// //     4:1
+// //     5:2
+    
+//     return answer;
+// }

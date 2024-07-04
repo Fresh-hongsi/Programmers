@@ -36,3 +36,30 @@ int solution(vector<int> numbers, int target) {
     answer = cnt;
     return answer;
 }
+
+
+// #include <string>
+// #include <vector>
+
+// using namespace std;
+
+// int counter = 0;
+
+// void dfs(int current, int depth, int target, vector<int> arr){
+//     if(depth==arr.size()){
+//         if(current==target){
+//             counter++;
+//         }
+//         return;
+//     }
+    
+//     dfs(current+arr[depth],depth+1,target,arr);
+//     dfs(current-arr[depth],depth+1,target,arr);
+    
+// }
+// int solution(vector<int> numbers, int target) {
+    
+//     dfs(numbers[0],1,target,numbers);
+//     dfs(-1*numbers[0],1,target,numbers);
+//     return counter;
+// }

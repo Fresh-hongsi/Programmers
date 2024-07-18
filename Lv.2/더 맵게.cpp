@@ -41,4 +41,41 @@ int solution(vector<int> scoville, int K) {
     return answer;
 }
 
+// #include <string>
+// #include <vector>
+// #include <algorithm>
+// #include <queue>
+// #include <functional>
+// #include <iostream>
+// using namespace std;
 
+// int solution(vector<int> scoville, int K) {
+//     int answer = 0;
+    
+//     priority_queue<int,vector<int>,greater<int>> pq;
+
+//     for(int i=0;i<scoville.size();i++){
+//         int cur = scoville[i];
+//         pq.push(cur);
+//     }
+
+//     while(pq.size()>=2){
+//         if(pq.top()>=K){
+//             break;
+//         }
+//         else{
+//             int top1 = pq.top();
+//             pq.pop();
+//             int top2 = pq.top();
+//             pq.pop();
+//             int next = top1+2*top2;
+//             pq.push(next);
+//             answer++;
+//         }
+//     }
+    
+//     if(pq.top()<K){
+//         answer=-1;
+//     }
+//     return answer;
+// }

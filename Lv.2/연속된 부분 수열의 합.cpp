@@ -25,12 +25,22 @@ vector<int> solution(vector<int> sequence, int k) {
                 resEnd = end;
                 min = end-start;
             }
+            
             end++;
+            // 인덱스 초과 예외처리
+            if(end==sequence.size()){
+                continue;
+            }
             sum+=sequence[end];
         }
         
         else if(sum<k){   
             end++;
+            
+            // 인덱스 초과 예외처리
+            if(end==sequence.size()){
+                continue;
+            }
             sum+=sequence[end];
         }
         

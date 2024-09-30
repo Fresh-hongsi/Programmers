@@ -34,30 +34,59 @@
 // }
 
 
+// #include <string>
+// #include <vector>
+// #include <algorithm>
+// #include <functional>
+// #include <iostream>
+// using namespace std;
+
+// vector<int> solution(int brown, int yellow) {
+//     vector<int> answer;
+    
+//     int total = brown+yellow;
+    
+//     for(int i=brown;i>0;i--){
+//         if(total%i==0){
+//             int x = i;
+//             int y = total/x;
+            
+//             if(((x-2)*(y-2))==yellow){
+//                 answer.push_back(x);
+//                 answer.push_back(y);
+//                 break;
+//             }
+//         }
+        
+//     }
+//     return answer;
+// }
+
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <functional>
 #include <iostream>
+#include <functional>
+#include <math.h>
 using namespace std;
 
 vector<int> solution(int brown, int yellow) {
     vector<int> answer;
     
-    int total = brown+yellow;
+    int total = brown + yellow;
     
-    for(int i=brown;i>0;i--){
-        if(total%i==0){
-            int x = i;
-            int y = total/x;
+    for(int i=yellow;i>=sqrt(yellow);i--){
+        if(yellow%i==0)
+        {
+            int a = i;
+            int b = yellow/i;
             
-            if(((x-2)*(y-2))==yellow){
-                answer.push_back(x);
-                answer.push_back(y);
+            if(((a+2)*(b+2))==brown+yellow){
+                answer.push_back(a+2);
+                answer.push_back(b+2);
                 break;
             }
         }
-        
     }
     return answer;
 }

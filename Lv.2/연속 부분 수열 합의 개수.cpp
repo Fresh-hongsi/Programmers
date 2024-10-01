@@ -1,38 +1,87 @@
 #include <string>
 #include <vector>
-#include <set>
+#include <algorithm>
 #include <iostream>
+#include <functional>
+#include <sstream>
+#include <limits.h>
+#include <set>
 using namespace std;
 
+// 누적합 + set 이용 --> 시간복잡도 고려
 int solution(vector<int> elements) {
+    int answer = 0;
+    set<int> s;
+    int n = elements.size();
     
-    set<int> s; // 중복하지 않는 수를 담기 위한 set
-    int initialSize = elements.size(); // 초기 원형 수열 길이
-    
-    // 순환해야하므로 기존 원형 수열을 뒤에 복제해서 붙여준다 (컨베이어 벨트처럼)
-    for(int i=0;i<initialSize;i++){
+    // 수열 이어붙이기 -> 원형 순열이기 때문
+    for(int i=0;i<n;i++){
         elements.push_back(elements[i]);
     }
     
-    // i: 내가 만들 부분 수열 길이
-    // j: 부분수열의 시작 인덱스
-    // k: 내가 정한 i번만큼 반복하며 temp 값을 합해가면서 변화시키기 위함
-    for(int i=1;i<=initialSize;i++){
-        
-        int temp;
-        for(int j=0;j<initialSize;j++){
-            temp=0;
-            for(int k=0;k<i;k++){
-                temp+=elements[j+k];
-            }
-            s.insert(temp); // set에 부분 수열의 함을 넣어보기 -> 중복되는 경우 안들어갈 것
-        }
-        
-        
+    // 먼저 누적합을 저장
+    vector<int> accumulatedSum;
+    int sum = 0;
+    for(int i=0;i<elements.size();i++){
+        sum+=elements[i];
+        accumulatedSum.push_back(sum);
     }
     
-    return s.size(); // 정답 반환
+    // 누적합에서, 규칙을 활용하여 부분 수열 합을 구해보고 set에 저장
+    for(int size = 1; size<=n;size++){
+        s.insert(accumulatedSum[size-1]);
+        for(int i=size;i<accumulatedSum.size();i++){
+            s.insert(accumulatedSum[i]-accumulatedSum[i-size]);
+        }
+    }
+    
+    answer = s.size();
+    return answer;
 }
+
+// 7 9 1 1 4 7 9 1 1 4
+
+// 7 16 17 18 22 29 38 39 40 44
+
+// 7 9 1 4
+// 16 10 2 5 11
+// 17 
+
+// #include <string>
+// #include <vector>
+// #include <set>
+// #include <iostream>
+// using namespace std;
+
+// int solution(vector<int> elements) {
+    
+//     set<int> s; // 중복하지 않는 수를 담기 위한 set
+//     int initialSize = elements.size(); // 초기 원형 수열 길이
+    
+//     // 순환해야하므로 기존 원형 수열을 뒤에 복제해서 붙여준다 (컨베이어 벨트처럼)
+//     for(int i=0;i<initialSize;i++){
+//         elements.push_back(elements[i]);
+//     }
+    
+//     // i: 내가 만들 부분 수열 길이
+//     // j: 부분수열의 시작 인덱스
+//     // k: 내가 정한 i번만큼 반복하며 temp 값을 합해가면서 변화시키기 위함
+//     for(int i=1;i<=initialSize;i++){
+        
+//         int temp;
+//         for(int j=0;j<initialSize;j++){
+//             temp=0;
+//             for(int k=0;k<i;k++){
+//                 temp+=elements[j+k];
+//             }
+//             s.insert(temp); // set에 부분 수열의 함을 넣어보기 -> 중복되는 경우 안들어갈 것
+//         }
+        
+        
+//     }
+    
+//     return s.size(); // 정답 반환
+// }
 
 // #include <string>
 // #include <vector>

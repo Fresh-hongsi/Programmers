@@ -72,58 +72,129 @@
 // // 치킨 사과 사과 바나나 쌀 사과 돼지고기 바나나 돼지고기 쌀 냄비 바나나 사과 바나나
 
 
+// #include <string>
+// #include <vector>
+// #include <algorithm>
+// #include <iostream>
+// #include <functional>
+// #include <map>
+// using namespace std;
+
+// int solution(vector<string> want, vector<int> number, vector<string> discount) {
+//     int answer = 0;
+    
+//     map<string,int> wishMap;
+    
+//     // 정현이가 살 물건과 양을 wishMap으로 관리
+//     for(int i=0;i<want.size();i++){
+//         string key = want[i];
+//         int val = number[i];
+        
+//         wishMap[key]=val;
+//     }
+    
+//     // 0번째날부터 순차적으로 접근하며 10일동안 할인하는 품목을 discountMap으로 관리
+//     for(int i=0;i<=discount.size()-10;i++){
+//         map<string,int> discountMap;
+//         for(int j=0;j<10;j++){
+//             discountMap[discount[i+j]]++;
+//         }
+        
+//         bool flag = true;
+//         for(auto k: wishMap){
+//             if(discountMap.find(k.first)!=discountMap.end())//wish품목이 discountMap에 하나라도 있다면
+//             {
+//                 if(k.second<=discountMap[k.first]){//사려고 하는 양보다 discountMap에 더 많이 있다면 true 유지
+//                     flag=true;
+//                 }
+//                 else{ //사려고 하는 양보다 discountMap의 양이 더 적다면 불가함
+//                     flag=false;
+//                     break;
+//                 }
+//             }   
+//             else{ //wish품목이 discountMap에 없다면 불가함
+//                 flag=false;
+//                 break;
+//             }
+//         }
+        
+//         if(flag==true){
+//             answer++;
+//         }
+        
+//     }
+    
+    
+//     return answer;
+// }
+
 #include <string>
 #include <vector>
-#include <algorithm>
-#include <iostream>
-#include <functional>
 #include <map>
+#include <algorithm>
+#include <functional>
+#include <limits.h>
 using namespace std;
+    
+int answer = 0;
+int k = 0;
+map<string,int> m1;
+map<string,int> m2;
 
-int solution(vector<string> want, vector<int> number, vector<string> discount) {
-    int answer = 0;
+// want와 해당 기간의 discount가 맞아떨어진다면 true, 아니면 false
+bool check(){
     
-    map<string,int> wishMap;
-    
-    // 정현이가 살 물건과 양을 wishMap으로 관리
-    for(int i=0;i<want.size();i++){
-        string key = want[i];
-        int val = number[i];
+    bool flag = true;
+    for(auto k: m1){
+        string wantItem = k.first;
+        int wantItemNum = k.second;
         
-        wishMap[key]=val;
-    }
-    
-    // 0번째날부터 순차적으로 접근하며 10일동안 할인하는 품목을 discountMap으로 관리
-    for(int i=0;i<=discount.size()-10;i++){
-        map<string,int> discountMap;
-        for(int j=0;j<10;j++){
-            discountMap[discount[i+j]]++;
-        }
-        
-        bool flag = true;
-        for(auto k: wishMap){
-            if(discountMap.find(k.first)!=discountMap.end())//wish품목이 discountMap에 하나라도 있다면
-            {
-                if(k.second<=discountMap[k.first]){//사려고 하는 양보다 discountMap에 더 많이 있다면 true 유지
-                    flag=true;
-                }
-                else{ //사려고 하는 양보다 discountMap의 양이 더 적다면 불가함
-                    flag=false;
-                    break;
-                }
-            }   
-            else{ //wish품목이 discountMap에 없다면 불가함
-                flag=false;
+        if(m2.find(wantItem)!=m2.end()){
+            if(wantItemNum<=m2[wantItem]){
+                continue;
+            }
+            else{
+                flag = false;
                 break;
             }
         }
-        
+        else{
+            flag=false;
+            break;
+        }
+    }
+    return flag;
+}
+
+// 슬라이딩 윈도우로 풀이
+int solution(vector<string> want, vector<int> number, vector<string> discount) {
+
+    // want를 map1으로 관리
+    for(int i=0;i<want.size();i++){
+        string cur = want[i];
+        m1[cur] = number[i];
+        k+=number[i];
+    }
+    
+    // discount를 map2로 관리
+    for(int i=0;i<k;i++){
+        m2[discount[i]]++;
+    }
+    
+    // 슬라이딩 윈도로우로 접근해보며 check
+    for(int i=0;i<=discount.size()-k;i++){
+        bool flag = check();
         if(flag==true){
             answer++;
         }
+        // 만약 마지막에 도달했다면 탈출
+        if(i==discount.size()-k){
+            break;
+        }
         
+        m2[discount[i]]--; // 앞에서 하나 제거
+        m2[discount[i+k]]++; // 뒤에 하나 추가
     }
-    
     
     return answer;
 }
